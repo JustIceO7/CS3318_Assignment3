@@ -8,12 +8,8 @@ public class ColourTable {
         if (capacity <= 1) {
             throw new IllegalArgumentException("Capacity must be greater than 1.");
         }
-        int test_capacity = capacity;
-        while (test_capacity > 1) {
-            if (test_capacity % 2 != 0) {
-                throw new IllegalArgumentException("Capacity must be a power of 2.");
-            }
-            test_capacity = test_capacity / 2;
+        if (((capacity & (capacity - 1)) != 0)) {
+            throw new IllegalArgumentException("Capacity must be a power of 2.");
         }
         this.colours = new int[capacity];
         this.capacity = capacity;
