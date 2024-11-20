@@ -53,4 +53,71 @@ public class ColourTableTest {
         assertArrayEquals(expectedColours,actualColours);
     }
 
+    /**
+     * Tests adding a valid rgb colour. Should not result in any errors.
+     */
+    @Test
+    void testAddValidColour() {
+        ColourTable table = new ColourTable(2);
+        assertDoesNotThrow(() -> table.add(0xFFFFFF));
+    }
+
+    /**
+     * Tests to see if colours array reflects what is added
+     */
+    @Test
+    void testAssertAddedColoursAreInArray() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFF0);
+
+        int[] colours = table.getColours();
+        assertEquals(0xFFFFFF, colours[0]);
+        assertEquals(0xFFFFF0, colours[1]);
+    }
+
+    /**
+     * Tests adding duplicate colours. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testAddDuplicateColour() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF));
+    }
+
+    /**
+     * Tests adding in invalid rgb colours. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testAddInvalidColour() {
+        ColourTable table = new ColourTable(2);
+        assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF0));
+        assertThrows(IllegalArgumentException.class, () -> table.add(-1));
+    }
+
+    /**
+     * Tests adding in too many colours surpassing ColourTable capacity. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddTooManyColours() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFF0);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> table.add(0xFFFF00));
+    }
+
+    /**
+     * Tests getter method for current_index
+     */
+    @Test
+    void testGetCurrentIndex() {
+        ColourTable table = new ColourTable(2);
+        int actualIndex1 = table.getCurrentIndex();
+        assertEquals(actualIndex1,0);
+        table.add(0xFFFFFF);
+        int actualIndex2 = table.getCurrentIndex();
+        assertEquals(actualIndex2,1);
+    }
+
 }
