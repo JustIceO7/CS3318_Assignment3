@@ -1,6 +1,9 @@
 import org.example.ColourTable;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -120,4 +123,32 @@ public class ColourTableTest {
         assertEquals(actualIndex2,1);
     }
 
+    /**
+     * Tests getter method of coloursTracker
+     */
+    @Test
+    void testGetColoursTracker() {
+        ColourTable table = new ColourTable(2);
+        Set<Integer> expectedSet = new HashSet<>();
+        Set<Integer> actualSet = table.getColoursTracker();
+
+        assertEquals(expectedSet, actualSet);
+    }
+
+    /**
+     * Tests to see if coloursTracker set reflects what is added
+     */
+    @Test
+    void testAssertAddedColoursAreInSet() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFF0);
+
+        Set<Integer> expectedSet = new HashSet<>();
+        expectedSet.add(0xFFFFFF);
+        expectedSet.add(0xFFFFF0);
+
+        assertEquals(expectedSet, table.getColoursTracker());
+    }
 }
+

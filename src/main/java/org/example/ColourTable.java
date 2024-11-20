@@ -1,9 +1,13 @@
 package org.example;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ColourTable {
     private final int[] colours;
     private final int capacity;
     private int current_index;
+    private final Set<Integer> coloursTracker;
 
     public ColourTable(int capacity) {
         if (capacity <= 1) {
@@ -15,6 +19,7 @@ public class ColourTable {
         this.colours = new int[capacity];
         this.capacity = capacity;
         this.current_index = 0;
+        this.coloursTracker = new HashSet<>();
     }
 
     public void add(int colour) {
@@ -24,12 +29,11 @@ public class ColourTable {
         else if (this.current_index == this.capacity) {
             throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
-        for (int c : this.colours) {
-            if (colour == c) {
-                throw new IllegalArgumentException("RGB colour already in colours list!");
-            }
+        else if (this.coloursTracker.contains(colour)) {
+            throw new IllegalArgumentException("RGB colour already in colours list!");
         }
         this.colours[current_index] = colour;
+        this.coloursTracker.add(colour);
         this.current_index++;
     }
 
@@ -43,6 +47,10 @@ public class ColourTable {
 
     public int getCurrentIndex() {
         return this.current_index;
+    }
+
+    public Set<Integer> getColoursTracker() {
+        return this.coloursTracker;
     }
 
 }
