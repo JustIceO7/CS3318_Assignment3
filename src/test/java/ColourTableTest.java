@@ -80,13 +80,28 @@ public class ColourTableTest {
     }
 
     /**
-     * Tests adding duplicate colours. Should result in IllegalArgumentException Error.
+     * Tests adding duplicate colours and seeing if ColourTable reflects the correct data.
      */
     @Test
-    void testAddDuplicateColour() {
+    void testAddDuplicateColourCheckingColours() {
         ColourTable table = new ColourTable(2);
         table.add(0xFFFFFF);
-        assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF));
+        table.add(0xFFFFFF);
+        int[] expectedColours = new int[]{0xFFFFFF,0};
+        assertArrayEquals(table.getColours(), expectedColours);
+    }
+
+    /**
+     * Tests adding duplicate colours and seeing if ColoursTracker reflects the correct data.
+     */
+    @Test
+    void testAddDuplicateColourCheckingColoursTracker() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFFF);
+        Set<Integer> expectedSet = new HashSet<>();
+        expectedSet.add(0xFFFFFF);
+        assertEquals(table.getColoursTracker(), expectedSet);
     }
 
     /**

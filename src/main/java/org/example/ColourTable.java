@@ -30,7 +30,7 @@ public class ColourTable {
             throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
         else if (this.coloursTracker.contains(colour)) {
-            throw new IllegalArgumentException("RGB colour already in colours list!");
+            return;
         }
         this.colours[current_index] = colour;
         this.coloursTracker.add(colour);
