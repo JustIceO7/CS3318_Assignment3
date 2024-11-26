@@ -16,6 +16,9 @@ public class ColourTableTest {
     @Test
     void testValidConstructor() {
         assertDoesNotThrow(() -> new ColourTable(2));
+        assertDoesNotThrow(() -> new ColourTable(4));
+        assertDoesNotThrow(() -> new ColourTable(8));
+        assertDoesNotThrow(() -> new ColourTable(16));
     }
 
     /**
