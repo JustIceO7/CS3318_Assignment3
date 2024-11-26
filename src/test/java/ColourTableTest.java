@@ -60,7 +60,7 @@ public class ColourTableTest {
      * Tests adding a valid rgb colour. Should not result in any errors.
      */
     @Test
-    void testAddValidColour() {
+    void testAddValidColourHex() {
         ColourTable table = new ColourTable(2);
         assertDoesNotThrow(() -> table.add(0xFFFFFF));
     }
@@ -108,7 +108,7 @@ public class ColourTableTest {
      * Tests adding in invalid rgb colours. Should result in IllegalArgumentException Error.
      */
     @Test
-    void testAddInvalidColour() {
+    void testAddInvalidColourHex() {
         ColourTable table = new ColourTable(2);
         assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF0));
         assertThrows(IllegalArgumentException.class, () -> table.add(-1));
@@ -164,6 +164,42 @@ public class ColourTableTest {
         expectedSet.add(0xFFFFF0);
 
         assertEquals(expectedSet, table.getColoursTracker());
+    }
+
+    /**
+     *  Tests adding negative RGB. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddInvalidColourNegativeRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertThrows(IllegalArgumentException.class, () -> table.add(-1, 50, 50));
+        assertThrows(IllegalArgumentException.class, () -> table.add(50, -1, 50));
+        assertThrows(IllegalArgumentException.class, () -> table.add(50, 50, -1));
+    }
+
+    /**
+     *  Tests adding out of range RGB values. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddInvalidColourOutOfRangeRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertThrows(IllegalArgumentException.class, () -> table.add(256, 1, 1));
+        assertThrows(IllegalArgumentException.class, () -> table.add(1, 256, 1));
+        assertThrows(IllegalArgumentException.class, () -> table.add(1, 1, 256));
+    }
+
+    /**
+     *  Tests adding valid RGB values.
+     */
+    @Test
+    void testAddValidColourRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertDoesNotThrow(() -> table.add(0, 0, 0));
+        assertDoesNotThrow(() -> table.add(255, 255, 255));
+        assertDoesNotThrow(() -> table.add(123, 123, 123));
     }
 }
 
