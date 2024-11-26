@@ -204,5 +204,19 @@ public class ColourTableTest {
         assertDoesNotThrow(() -> table.add(255, 255, 255));
         assertDoesNotThrow(() -> table.add(123, 123, 123));
     }
+
+    /**
+     *  Tests isFull method
+     */
+    @Test
+    void testIsFull() {
+        ColourTable table = new ColourTable(2);
+
+        table.add(0xFFFFFF);
+        assertFalse(table.isFull());
+
+        table.add(0xFFFF00);
+        assertTrue(table.isFull());
+    }
 }
 
