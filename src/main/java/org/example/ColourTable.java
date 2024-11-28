@@ -22,21 +22,21 @@ public class ColourTable {
     }
 
     public void add(int r, int g, int b) {
-        if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+        if (!this.isValidRGB(r,g,b)) {
             throw new IllegalArgumentException("Invalid RGB values.");
         }
         if (this.current_index >= this.colours.length) {
             throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
-        int hex_colour = (r << 16) | (g << 8) | b;
-        if (this.coloursTracker.contains(hex_colour)) {
+        int colour = (r << 16) | (g << 8) | b;
+        if (this.coloursTracker.contains(colour)) {
             throw new IllegalArgumentException("Duplicate colour detected.");
         }
-        this.updateTable(hex_colour);
+        this.updateTable(colour);
     }
 
     public void add (int hex_colour) {
-        if (hex_colour < 0 || hex_colour > 0xFFFFFF) {
+        if (!this.isValidHex(hex_colour))  {
             throw new IllegalArgumentException("Invalid hexadecimal values.");
         }
         if (this.current_index >= this.colours.length) {
@@ -52,6 +52,14 @@ public class ColourTable {
         this.colours[current_index] = colour;
         this.coloursTracker.add(colour);
         this.current_index++;
+    }
+
+    private boolean isValidRGB(int r, int g, int b) {
+        return !(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255);
+    }
+
+    private boolean isValidHex(int hexadecimal) {
+        return !(hexadecimal < 0 || hexadecimal > 0xFFFFFF);
     }
 
     public int[] getColours() {
