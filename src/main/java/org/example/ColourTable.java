@@ -28,13 +28,11 @@ public class ColourTable {
         if (this.current_index >= this.colours.length) {
             throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
-        int colour = (r << 16) | (g << 8) | b;
-        if (this.coloursTracker.contains(colour)) {
+        int hex_colour = (r << 16) | (g << 8) | b;
+        if (this.coloursTracker.contains(hex_colour)) {
             throw new IllegalArgumentException("Duplicate colour detected.");
         }
-        this.colours[current_index] = colour;
-        this.current_index++;
-        this.coloursTracker.add(colour);
+        this.updateTable(hex_colour);
     }
 
     public void add (int hex_colour) {
@@ -47,9 +45,13 @@ public class ColourTable {
         if (this.coloursTracker.contains(hex_colour)) {
             throw new IllegalArgumentException("Duplicate colour detected.");
         }
-        this.colours[current_index] = hex_colour;
+        this.updateTable(hex_colour);
+    }
+
+    private void updateTable(int colour) {
+        this.colours[current_index] = colour;
+        this.coloursTracker.add(colour);
         this.current_index++;
-        this.coloursTracker.add(hex_colour);
     }
 
     public int[] getColours() {
