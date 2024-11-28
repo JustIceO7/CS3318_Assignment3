@@ -1,8 +1,8 @@
 import org.example.ColourTable;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ColourTableTest {
     /**
@@ -65,5 +65,19 @@ public class ColourTableTest {
         table.add(0xFFFFFF);
         table.add(0xFFFFF0);
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> table.add(0xFFFF00));
+    }
+
+    /**
+     * Tests to see if colours array reflects what is added
+     */
+    @Test
+    void testAssertAddedColoursAreInArray() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFF0);
+
+        int[] colours = table.getColours();
+        assertEquals(0xFFFFFF, colours[0]);
+        assertEquals(0xFFFFF0, colours[1]);
     }
 }

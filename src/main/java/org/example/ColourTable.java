@@ -26,4 +26,8 @@ public class ColourTable {
         this.colours[current_index] = hex_colour;
         this.current_index++;
     }
+
+    public int[] getColours() {
+        return this.colours;
+    }
 }
