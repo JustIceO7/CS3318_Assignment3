@@ -1,8 +1,12 @@
 package org.example;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ColourTable {
     private final int[] colours;
     private int current_index;
+    private final Set<Integer> coloursTracker;
 
 
     public ColourTable(int capacity) {
@@ -14,6 +18,7 @@ public class ColourTable {
         }
         this.colours = new int[capacity];
         this.current_index = 0;
+        this.coloursTracker = new HashSet<>();
     }
 
     public void add (int hex_colour) {
@@ -30,9 +35,14 @@ public class ColourTable {
         }
         this.colours[current_index] = hex_colour;
         this.current_index++;
+        this.coloursTracker.add(hex_colour);
     }
 
     public int[] getColours() {
         return this.colours;
+    }
+
+    public Set<Integer> getColoursTracker() {
+        return this.coloursTracker;
     }
 }
