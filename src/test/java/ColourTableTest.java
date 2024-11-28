@@ -25,4 +25,14 @@ public class ColourTableTest {
         assertThrows(IllegalArgumentException.class, () -> new ColourTable(0));
         assertThrows(IllegalArgumentException.class, () -> new ColourTable(1));
     }
+
+    /**
+     * Tests an invalid constructor. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testInvalidConstructorNonPowerOfTwoCapacity() {
+        assertThrows(IllegalArgumentException.class, () -> new ColourTable(5));
+        assertThrows(IllegalArgumentException.class, () -> new ColourTable(7));
+        assertThrows(IllegalArgumentException.class, () -> new ColourTable(11));
+    }
 }
