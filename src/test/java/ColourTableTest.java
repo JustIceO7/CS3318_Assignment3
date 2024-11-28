@@ -132,4 +132,15 @@ public class ColourTableTest {
         assertThrows(IllegalArgumentException.class, () -> table.add(0, 0, -1));
     }
 
+    /**
+     *  Tests adding out of range RGB values. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddInvalidColourOutOfRangeRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertThrows(IllegalArgumentException.class, () -> table.add(256, 1, 1));
+        assertThrows(IllegalArgumentException.class, () -> table.add(1, 256, 1));
+        assertThrows(IllegalArgumentException.class, () -> table.add(1, 1, 256));
+    }
 }
