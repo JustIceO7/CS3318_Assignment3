@@ -45,4 +45,14 @@ public class ColourTableTest {
         assertDoesNotThrow(() -> table.add(0xFFFFFF));
         assertDoesNotThrow(() -> table.add(0xFFFFF0));
     }
+
+    /**
+     * Tests adding in invalid hex colours. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testAddInvalidColourHex() {
+        ColourTable table = new ColourTable(2);
+        assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF0));
+        assertThrows(IllegalArgumentException.class, () -> table.add(-1));
+    }
 }

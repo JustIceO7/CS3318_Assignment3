@@ -16,6 +16,9 @@ public class ColourTable {
     }
 
     public void add (int hex_colour) {
+        if (hex_colour < 0 || hex_colour > 0xFFFFFF) {
+            throw new IllegalArgumentException("Invalid RGB values.");
+        }
         this.colours[current_index] = hex_colour;
         this.current_index++;
     }
