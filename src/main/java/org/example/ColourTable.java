@@ -21,6 +21,13 @@ public class ColourTable {
         this.coloursTracker = new HashSet<>();
     }
 
+    public void add(int r, int g, int b) {
+        int colour = (r << 16) | (g << 8) | b;
+        this.colours[current_index] = colour;
+        this.current_index++;
+        this.coloursTracker.add(colour);
+    }
+
     public void add (int hex_colour) {
         if (hex_colour < 0 || hex_colour > 0xFFFFFF) {
             throw new IllegalArgumentException("Invalid hexadecimal values.");

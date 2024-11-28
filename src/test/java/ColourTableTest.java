@@ -107,4 +107,16 @@ public class ColourTableTest {
         expectedSet.add(0xFFFFF0);
         assertEquals(table.getColoursTracker(), expectedSet);
     }
+
+    /**
+     *  Tests adding valid RGB values.
+     */
+    @Test
+    void testAddValidColourRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertDoesNotThrow(() -> table.add(0, 0, 0));
+        assertDoesNotThrow(() -> table.add(255, 255, 255));
+        assertDoesNotThrow(() -> table.add(123, 123, 123));
+    }
 }
