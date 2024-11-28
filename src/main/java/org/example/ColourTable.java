@@ -4,6 +4,7 @@ public class ColourTable {
     private final int[] colours;
     private int current_index;
 
+
     public ColourTable(int capacity) {
         if (capacity <= 1) {
             throw new IllegalArgumentException("Capacity must be greater than 1.");
@@ -17,7 +18,10 @@ public class ColourTable {
 
     public void add (int hex_colour) {
         if (hex_colour < 0 || hex_colour > 0xFFFFFF) {
-            throw new IllegalArgumentException("Invalid RGB values.");
+            throw new IllegalArgumentException("Invalid hexadecimal values.");
+        }
+        if (this.current_index >= this.colours.length) {
+            throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
         this.colours[current_index] = hex_colour;
         this.current_index++;

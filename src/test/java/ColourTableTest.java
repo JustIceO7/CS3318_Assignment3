@@ -55,4 +55,15 @@ public class ColourTableTest {
         assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF0));
         assertThrows(IllegalArgumentException.class, () -> table.add(-1));
     }
+
+    /**
+     * Tests adding in too many colours surpassing ColourTable capacity. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddTooManyColours() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        table.add(0xFFFFF0);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> table.add(0xFFFF00));
+    }
 }
