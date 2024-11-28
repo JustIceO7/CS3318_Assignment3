@@ -26,6 +26,9 @@ public class ColourTable {
             throw new IllegalArgumentException("Invalid RGB values.");
         }
         int colour = (r << 16) | (g << 8) | b;
+        if (this.coloursTracker.contains(colour)) {
+            throw new IllegalArgumentException("Duplicate colour detected.");
+        }
         this.colours[current_index] = colour;
         this.current_index++;
         this.coloursTracker.add(colour);

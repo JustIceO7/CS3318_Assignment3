@@ -85,10 +85,10 @@ public class ColourTableTest {
     }
 
     /**
-     *  Tests adding duplicate colours. Should result in IllegalArgumentException Error.
+     *  Tests adding duplicate hex colours. Should result in IllegalArgumentException Error.
      */
     @Test
-    void testAddingDuplicateColours() {
+    void testAddingDuplicateHexColours() {
         ColourTable table = new ColourTable(2);
         table.add(0xFFFFFF);
         assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF));
@@ -142,5 +142,15 @@ public class ColourTableTest {
         assertThrows(IllegalArgumentException.class, () -> table.add(256, 1, 1));
         assertThrows(IllegalArgumentException.class, () -> table.add(1, 256, 1));
         assertThrows(IllegalArgumentException.class, () -> table.add(1, 1, 256));
+    }
+
+    /**
+     *  Tests adding duplicate rgb colours. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testAddingDuplicateRGBColours() {
+        ColourTable table = new ColourTable(2);
+        table.add(255,255,255);
+        assertThrows(IllegalArgumentException.class, () -> table.add(255,255,255));
     }
 }
