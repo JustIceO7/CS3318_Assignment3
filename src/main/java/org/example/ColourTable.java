@@ -25,6 +25,9 @@ public class ColourTable {
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
             throw new IllegalArgumentException("Invalid RGB values.");
         }
+        if (this.current_index >= this.colours.length) {
+            throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
+        }
         int colour = (r << 16) | (g << 8) | b;
         if (this.coloursTracker.contains(colour)) {
             throw new IllegalArgumentException("Duplicate colour detected.");

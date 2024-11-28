@@ -60,10 +60,10 @@ public class ColourTableTest {
     }
 
     /**
-     * Tests adding in too many colours surpassing ColourTable capacity. Should result in ArrayIndexOutOfBoundsException Error.
+     * Tests adding in too many hex colours surpassing ColourTable capacity. Should result in ArrayIndexOutOfBoundsException Error.
      */
     @Test
-    void testAddTooManyColours() {
+    void testAddTooManyHexColours() {
         ColourTable table = new ColourTable(2);
         table.add(0xFFFFFF);
         table.add(0xFFFFF0);
@@ -152,5 +152,16 @@ public class ColourTableTest {
         ColourTable table = new ColourTable(2);
         table.add(255,255,255);
         assertThrows(IllegalArgumentException.class, () -> table.add(255,255,255));
+    }
+
+    /**
+     * Tests adding in too many rgb colours surpassing ColourTable capacity. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddTooManyRGBColours() {
+        ColourTable table = new ColourTable(2);
+        table.add(255,255,255);
+        table.add(255,255,0);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> table.add(255,0,0));
     }
 }
