@@ -119,4 +119,17 @@ public class ColourTableTest {
         assertDoesNotThrow(() -> table.add(255, 255, 255));
         assertDoesNotThrow(() -> table.add(123, 123, 123));
     }
+
+    /**
+     *  Tests adding negative RGB. Should result in ArrayIndexOutOfBoundsException Error.
+     */
+    @Test
+    void testAddInvalidColourNegativeRGB() {
+        ColourTable table = new ColourTable(8);
+
+        assertThrows(IllegalArgumentException.class, () -> table.add(-1, 0, 0));
+        assertThrows(IllegalArgumentException.class, () -> table.add(0, -1, 0));
+        assertThrows(IllegalArgumentException.class, () -> table.add(0, 0, -1));
+    }
+
 }

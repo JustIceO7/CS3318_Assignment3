@@ -22,6 +22,9 @@ public class ColourTable {
     }
 
     public void add(int r, int g, int b) {
+        if (r < 0 || g < 0 || b < 0) {
+            throw new IllegalArgumentException("Invalid RGB values.");
+        }
         int colour = (r << 16) | (g << 8) | b;
         this.colours[current_index] = colour;
         this.current_index++;
