@@ -23,6 +23,11 @@ public class ColourTable {
         if (this.current_index >= this.colours.length) {
             throw new ArrayIndexOutOfBoundsException("Too many colours added limit exceeded!");
         }
+        for (int colour : this.colours) {
+            if (colour == hex_colour) {
+                throw new IllegalArgumentException("Duplicate colour detected.");
+            }
+        }
         this.colours[current_index] = hex_colour;
         this.current_index++;
     }

@@ -80,4 +80,14 @@ public class ColourTableTest {
         assertEquals(0xFFFFFF, colours[0]);
         assertEquals(0xFFFFF0, colours[1]);
     }
+
+    /**
+     *  Tests adding duplicate colours. Should result in IllegalArgumentException Error.
+     */
+    @Test
+    void testAddingDuplicateColours() {
+        ColourTable table = new ColourTable(2);
+        table.add(0xFFFFFF);
+        assertThrows(IllegalArgumentException.class, () -> table.add(0xFFFFFF));
+    }
 }
